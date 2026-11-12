@@ -1,0 +1,55 @@
+[
+  {
+    "public_id": "LM-1042",
+    "customer_first_name": "Ana",
+    "status": "shipped",
+    "carrier": "Lume Express",
+    "tracking_code": "LMX-1042-BR",
+    "total_cents": 64900,
+    "note_pt": "Saiu do centro de distribuição em São Paulo.",
+    "note_en": "It left the distribution center in São Paulo.",
+    "items": [
+      {"sku": "NIMBUS-HP", "qty": 1, "unit_price_cents": 64900}
+    ]
+  },
+  {
+    "public_id": "LM-1108",
+    "customer_first_name": "João",
+    "status": "processing",
+    "carrier": null,
+    "tracking_code": null,
+    "total_cents": 28900,
+    "note_pt": "Pagamento confirmado. Ainda não foi despachado.",
+    "note_en": "Payment confirmed. It has not shipped yet.",
+    "items": [
+      {"sku": "LUME-LAMP", "qty": 1, "unit_price_cents": 28900}
+    ]
+  },
+  {
+    "public_id": "LM-0981",
+    "customer_first_name": "Lia",
+    "status": "delivered",
+    "carrier": "Lume Express",
+    "tracking_code": "LMX-0981-BR",
+    "total_cents": 17400,
+    "note_pt": "Entregue ao destinatário.",
+    "note_en": "Delivered to the recipient.",
+    "items": [
+      {"sku": "AURORA-MUG", "qty": 1, "unit_price_cents": 7900},
+      {"sku": "BRUMA-CANDLE", "qty": 1, "unit_price_cents": 9500}
+    ]
+  },
+  {
+    "public_id": "LM-1204",
+    "customer_first_name": "Rafael",
+    "status": "cancelled",
+    "carrier": null,
+    "tracking_code": null,
+    "total_cents": 15900,
+    "note_pt": "Cancelado a pedido. O reembolso de R$ 159,00 volta em até 5 dias úteis pelo mesmo meio de pagamento.",
+    "note_en": "Cancelled on request. The R$ 159.00 refund returns to the same payment method within 5 business days.",
+    "items": [
+      {"sku": "SOL-CHARGER", "qty": 1, "unit_price_cents": 15900}
+    ]
+  }
+]

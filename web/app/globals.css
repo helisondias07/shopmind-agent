@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background:
+    radial-gradient(900px 420px at 0% -10%, rgba(184, 92, 50, 0.12), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, rgba(30, 92, 73, 0.1), transparent 50%),
+    #f3ecdf;
+}
+
+::selection {
+  background: #1e5c49;
+  color: #f6f1e7;
+}
+
+:focus-visible {
+  outline: 2px solid #1e5c49;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
