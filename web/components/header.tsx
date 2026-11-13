@@ -25,47 +25,46 @@ export function Header() {
       });
     return () => controller.abort();
   }, []);
-  const mode =
-    health == null ? "…" : health.provider === "fake" ? t.demo : health.model;
+
+  const mode = health == null ? "…" : health.provider === "fake" ? t.demo : health.model;
 
   return (
-    <header className="border-b border-ink/10">
-      <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-4">
-        <Link href="/" className="group flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-moss text-cream">
-            <LampIcon />
-          </span>
-          <span>
-            <span className="block font-serif text-xl leading-none tracking-tight">ShopMind</span>
-            <span className="text-[11px] uppercase tracking-[0.18em] text-ink/60">{t.storeName}</span>
-          </span>
+    <header className="sticky top-0 z-20 border-b border-line/80 bg-void/80 backdrop-blur-md">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <Link href="/" className="flex items-center gap-2.5">
+          <Mark />
+          <span className="text-sm font-semibold tracking-tight">ShopMind</span>
         </Link>
-        <nav className="ml-auto flex items-center gap-2 text-sm">
-          <Link
-            href="/"
-            className={`rounded-full px-3 py-1 ${path === "/" ? "bg-ink text-cream" : "text-ink/70"}`}
-            aria-current={path === "/" ? "page" : undefined}
-          >
-            {t.storeName}
-          </Link>
-          <Link
-            href="/evals"
-            className={`rounded-full px-3 py-1 ${path === "/evals" ? "bg-ink text-cream" : "text-ink/70"}`}
-            aria-current={path === "/evals" ? "page" : undefined}
-          >
-            {t.evals}
-          </Link>
-          <span className="hidden items-center gap-2 rounded-full border border-ink/15 px-3 py-1 text-xs text-ink/70 sm:inline-flex">
-            <span className={`h-1.5 w-1.5 rounded-full ${health?.provider === "fake" ? "bg-clay" : "bg-moss"}`} />
+        <nav className="ml-auto flex items-center gap-1.5 text-sm">
+          <span className="hidden sm:contents">
+            <NavLink href="/" current={path === "/"} label={t.shop} />
+          </span>
+          <NavLink href="/evals" current={path === "/evals"} label={t.evals} />
+          <span className="ml-1 hidden items-center gap-2 rounded-md border border-line bg-panel px-2.5 py-1 font-mono text-[11px] text-mist sm:inline-flex">
+            <span
+              className={`h-1.5 w-1.5 rounded-full ${health?.provider === "fake" ? "bg-signal" : "bg-ion"} ${health ? "node-live" : ""}`}
+            />
             {mode}
           </span>
-          <div className="flex rounded-full border border-ink/15 p-0.5 text-xs">
+          <div className="ml-1 flex rounded-md border border-line p-0.5 font-mono text-[11px]">
             <LocaleButton active={locale === "pt"} onClick={() => setLocale("pt")} label="PT" />
             <LocaleButton active={locale === "en"} onClick={() => setLocale("en")} label="EN" />
           </div>
         </nav>
       </div>
     </header>
+  );
+}
+
+function NavLink({ href, current, label }: { href: string; current: boolean; label: string }) {
+  return (
+    <Link
+      href={href}
+      aria-current={current ? "page" : undefined}
+      className={`rounded-md px-2.5 py-1 text-xs ${current ? "bg-signal text-void" : "text-mist hover:text-snow"}`}
+    >
+      {label}
+    </Link>
   );
 }
 
@@ -84,17 +83,21 @@ function LocaleButton({
       onClick={onClick}
       aria-pressed={active}
       data-testid={`locale-${label.toLowerCase()}`}
-      className={`rounded-full px-2.5 py-1 ${active ? "bg-moss text-cream" : "text-ink/60"}`}
+      className={`rounded px-2 py-1 ${active ? "bg-raise text-signal" : "text-mist"}`}
     >
       {label}
     </button>
   );
 }
 
-function LampIcon() {
+function Mark() {
   return (
-    <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
-      <path d="M12 3v5M7 8h10M8.5 8c.4 5 1.4 8 3.5 8s3.1-3 3.5-8" stroke="currentColor" strokeWidth="1.4" fill="none" />
+    <svg viewBox="0 0 28 28" className="h-7 w-7" aria-hidden="true">
+      <rect width="28" height="28" rx="7" fill="#10151e" stroke="#2a3548" />
+      <circle cx="7" cy="14" r="1.6" fill="#3ef0c1" />
+      <circle cx="14" cy="9" r="1.6" fill="#7eb0ff" />
+      <circle cx="21" cy="16" r="1.6" fill="#3ef0c1" />
+      <path d="M8.5 14h4l1.6-5 3.4 11 1.6-5h2" stroke="#f4f7fb" strokeWidth="1.2" fill="none" />
     </svg>
   );
 }

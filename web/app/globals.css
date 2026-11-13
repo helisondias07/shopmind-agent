@@ -3,24 +3,79 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
-  background:
-    radial-gradient(900px 420px at 0% -10%, rgba(184, 92, 50, 0.12), transparent 55%),
-    radial-gradient(700px 380px at 100% 0%, rgba(30, 92, 73, 0.1), transparent 50%),
-    #f3ecdf;
+  background-color: #07090f;
+  background-image:
+    radial-gradient(900px 420px at 12% -10%, rgba(62, 240, 193, 0.14), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, rgba(126, 176, 255, 0.12), transparent 50%),
+    linear-gradient(rgba(62, 240, 193, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(62, 240, 193, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 56px 56px, 56px 56px;
+  background-attachment: fixed;
 }
 
 ::selection {
-  background: #1e5c49;
-  color: #f6f1e7;
+  background: #3ef0c1;
+  color: #07090f;
 }
 
 :focus-visible {
-  outline: 2px solid #1e5c49;
+  outline: 2px solid #3ef0c1;
   outline-offset: 3px;
+}
+
+@keyframes node-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes live-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(62, 240, 193, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(62, 240, 193, 0);
+  }
+}
+
+@keyframes caret {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.node-in {
+  animation: node-in 0.35s ease both;
+}
+
+.node-live {
+  animation: live-ring 1.5s ease-out infinite;
+}
+
+.caret::after {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  background: #3ef0c1;
+  animation: caret 1s steps(1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

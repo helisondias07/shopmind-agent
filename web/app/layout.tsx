@@ -1,32 +1,33 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Fraunces, Outfit } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import { Header } from "@/components/header";
 import { LocaleProvider } from "@/components/locale";
 import "./globals.css";
 
-const fraunces = Fraunces({
+const grotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const outfit = Outfit({
+const plex = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ShopMind — Lume & Co.",
+  title: "ShopMind",
   description:
-    "Atendimento da loja fictícia Lume & Co. Um agente LangGraph cita o catálogo, o estoque e as políticas antes de responder.",
+    "Support console for the fictional Lume catalog. A LangGraph agent answers from stock, orders, and policies, and cites the source.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${outfit.variable}`}>
-      <body className="min-h-screen font-sans text-ink antialiased">
+    <html lang="pt-BR" className={`${grotesk.variable} ${plex.variable}`}>
+      <body className="min-h-screen font-sans text-snow antialiased">
         <LocaleProvider>
           <Header />
           <main>{children}</main>

@@ -5,6 +5,7 @@ import { text } from "@/lib/copy";
 import { streamChat } from "@/lib/stream";
 import type { ChatMessage, ChatResponse, NodeTrace, PublicProduct } from "@/lib/types";
 import { ChatPanel } from "./chat-panel";
+import { Hero } from "./hero";
 import { useLocale } from "./locale";
 import { Storefront } from "./storefront";
 import { TracePanel } from "./trace-panel";
@@ -105,13 +106,14 @@ export function DemoApp() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-6">
-      <div className="mb-4 grid grid-cols-3 gap-2 lg:hidden">
+    <div className="mx-auto max-w-6xl px-4 py-5">
+      <Hero locale={locale} />
+      <div className="mt-4 grid grid-cols-3 gap-1 rounded-xl border border-line bg-panel p-1 lg:hidden">
         <TabButton active={tab === "shop"} onClick={() => setTab("shop")} label={t.shop} testId="tab-shop" />
         <TabButton active={tab === "chat"} onClick={() => setTab("chat")} label={t.chat} testId="tab-chat" />
         <TabButton active={tab === "trace"} onClick={() => setTab("trace")} label={t.trace} testId="tab-trace" />
       </div>
-      <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+      <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
         <div className={tab === "shop" ? "block" : "hidden lg:block"}>
           <Storefront
             locale={locale}
@@ -136,7 +138,7 @@ export function DemoApp() {
       <div className={`mt-6 ${tab === "trace" ? "block" : "hidden lg:block"}`}>
         <TracePanel locale={locale} nodes={liveNodes} response={last} streaming={busy} />
       </div>
-      <p className="mt-8 text-center text-xs text-ink/45">{t.footer}</p>
+      <p className="mt-8 text-center font-mono text-[11px] text-mist">{t.footer}</p>
     </div>
   );
 }
@@ -158,7 +160,7 @@ function TabButton({
       data-testid={testId}
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full px-3 py-2 text-sm ${active ? "bg-ink text-cream" : "bg-white/50 text-ink/70"}`}
+      className={`rounded-lg px-2 py-2 text-xs font-medium ${active ? "bg-signal text-void" : "text-mist"}`}
     >
       {label}
     </button>

@@ -8,7 +8,11 @@ Agente de atendimento da loja fictícia **Lume & Co.** Um grafo LangGraph consul
 
 Support agent for the fictional shop **Lume & Co.** A LangGraph workflow reads the catalog, stock, and policies before it answers, cites the source, and hands the conversation to a person when confidence is low.
 
-**Demo:** `https://<seu-projeto>.vercel.app` — substitua pelo endereço do `vercel deploy`.
+**Demo:** [shopmind-agent.vercel.app](https://shopmind-agent.vercel.app)
+
+![ShopMind no desktop: console escuro, inventário e grafo ao vivo](docs/screenshots/desktop.png)
+
+![ShopMind no celular: resposta com preço e fonte](docs/screenshots/mobile.png)
 
 **Author:** Helison Dias · **License:** MIT
 
@@ -20,7 +24,7 @@ Support agent for the fictional shop **Lume & Co.** A LangGraph workflow reads t
 
 O ShopMind atende no balcão da Lume & Co., uma loja de mesa e casa que só existe neste repositório. Ele não inventa preço nem estoque. Cada número da resposta precisa estar no SQLite ou na política citada. Se o cliente pede uma pessoa, ou se a mensagem não dá para classificar, o grafo encerra com um protocolo de handoff.
 
-A demo em `web/` é uma vitrine com o chat ao lado e um painel que mostra, em tempo real, os nós visitados, as tools chamadas, a intenção e a latência.
+A demo em `web/` é um console: inventário, mesa de chat e o grafo acendendo nó a nó, com a intenção, as tools e a latência.
 
 Sem `OPENAI_API_KEY` e sem `ANTHROPIC_API_KEY`, tudo roda em modo determinístico. Com uma das chaves, os nós de classificação e de redação passam a usar o modelo, e o guard de saída continua no comando: rascunho com preço fora da base é trocado pelo texto montado a partir dos dados.
 
@@ -112,7 +116,7 @@ flowchart LR
 | Banco | `db/models.py`, `services/` | Catálogo, políticas e pedidos |
 | RAG | `rag/` | Embeddings e índice em memória, com opção FAISS |
 | HTTP | `api/app.py` | `/api/chat`, streaming SSE, produtos, evals |
-| Demo | `web/` | Vitrine, chat, trilha do grafo, página de evals |
+| Demo | `web/` | Console, chat, trilha do grafo, página de evals |
 
 ### Decisões
 
@@ -208,7 +212,7 @@ O projeto foi escrito com apoio de agentes de código (Cursor e Claude Code). [A
 
 ShopMind is the counter for Lume & Co., a home-and-desk shop that exists only in this repository. It does not invent a price or a stock count. Every figure in a reply has to be in SQLite or in the policy it cites. If the shopper asks for a person, or the message cannot be classified, the graph stops with a handoff protocol.
 
-The page in `web/` is the shop floor, the chat, and a live trace of the nodes, tools, intent, and latency.
+The page in `web/` is a console: inventory, a chat desk, and the graph lighting up node by node, with intent, tools, and latency.
 
 With no API key the agent is deterministic. With `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`, classification and wording use that model, and the output guard still replaces any draft that cites a price missing from the tool payload.
 
