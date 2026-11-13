@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "returns",
+    "topic": "returns",
+    "title_pt": "Trocas e devoluções",
+    "title_en": "Returns and exchanges",
+    "body_pt": "Você tem 30 dias corridos depois do recebimento para pedir troca ou devolução. O item precisa estar sem uso, com a etiqueta e na embalagem original. O reembolso sai pelo mesmo meio de pagamento em até 7 dias úteis depois que o item chega ao nosso centro. Se o defeito for de fabricação, o frete de volta fica por nossa conta.",
+    "body_en": "You have 30 calendar days after delivery to request an exchange or a return. The item must be unused, with its label, in the original packaging. Refunds go back to the same payment method within 7 business days after the item reaches our studio. If the defect comes from manufacturing, we pay the return shipping."
+  },
+  {
+    "slug": "shipping",
+    "topic": "shipping",
+    "title_pt": "Frete e prazos",
+    "title_en": "Shipping and delivery",
+    "body_pt": "O frete é calculado pelo CEP. Pedidos a partir de R$ 299,00 têm frete grátis. A cotação do chat usa a tabela vigente da loja e é a fonte do preço e do prazo para aquele CEP. Não prometemos entrega em uma data de calendário.",
+    "body_en": "Shipping is quoted from the postal code. Orders from R$ 299.00 ship free. The quote in this chat uses the store's current table and is the source of truth for that postal code. We do not promise a calendar delivery date."
+  },
+  {
+    "slug": "warranty",
+    "topic": "warranty",
+    "title_pt": "Garantia",
+    "title_en": "Warranty",
+    "body_pt": "Eletrônicos da loja — fone, luminária e carregador — têm garantia de 12 meses contra defeito de fabricação. Os demais itens têm garantia legal de 90 dias. A garantia não cobre queda, umidade ou uso fora do descrito na página do produto.",
+    "body_en": "Electronics in the shop — headphones, the lamp, and the charger — carry a 12-month warranty against manufacturing defects. Other items carry the statutory 90-day warranty. The warranty does not cover drops, moisture, or use outside the product page."
+  },
+  {
+    "slug": "payment",
+    "topic": "payment",
+    "title_pt": "Pagamento",
+    "title_en": "Payment",
+    "body_pt": "Aceitamos Pix e cartões de crédito. O pagamento acontece no checkout do site, nunca neste chat. Não envie número de cartão, código de segurança ou senha por aqui. Se um número de cartão aparecer na conversa, ele é apagado antes de qualquer resposta.",
+    "body_en": "We accept Pix and credit cards. Payment happens on the website checkout, never in this chat. Do not send a card number, security code, or password here. If a card number shows up in the conversation, it is removed before any reply."
+  },
+  {
+    "slug": "privacy",
+    "topic": "privacy",
+    "title_pt": "Privacidade no atendimento",
+    "title_en": "Privacy in support",
+    "body_pt": "O atendimento consulta apenas o catálogo, as políticas públicas e o status de um pedido informado por você. Não pedimos documentos, senha ou dados de pagamento. O histórico fica ligado à sessão do navegador e serve só para continuar a conversa.",
+    "body_en": "Support looks only at the catalog, the public policies, and the status of an order id you provide. We do not ask for documents, passwords, or payment data. History is tied to the browser session and is used only to continue the conversation."
+  }
+]
