@@ -1,36 +1,40 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import { Atkinson_Hyperlegible, Syne } from "next/font/google";
 import { Header } from "@/components/header";
 import { LocaleProvider } from "@/components/locale";
 import "./globals.css";
 
-const grotesk = Space_Grotesk({
+const syne = Syne({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
   display: "swap",
 });
 
-const plex = IBM_Plex_Mono({
+const atkinson = Atkinson_Hyperlegible({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-atkinson",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "ShopMind",
+  title: "Lume",
   description:
-    "Support console for the fictional Lume catalog. A LangGraph agent answers from stock, orders, and policies, and cites the source.",
+    "Showroom da loja fictícia Lume. O atendimento responde com o preço, o estoque e a fonte do catálogo.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${grotesk.variable} ${plex.variable}`}>
-      <body className="min-h-screen font-sans text-snow antialiased">
+    <html lang="pt-BR" className={`${syne.variable} ${atkinson.variable}`}>
+      <body>
         <LocaleProvider>
-          <Header />
-          <main>{children}</main>
+          <div className="page">
+            <Header />
+            {children}
+          </div>
         </LocaleProvider>
       </body>
     </html>

@@ -4,18 +4,14 @@ import { useCallback, useEffect, useState } from "react";
 import { text } from "@/lib/copy";
 import { streamChat } from "@/lib/stream";
 import type { ChatMessage, ChatResponse, NodeTrace, PublicProduct } from "@/lib/types";
-import { ChatPanel } from "./chat-panel";
-import { Hero } from "./hero";
 import { useLocale } from "./locale";
-import { Storefront } from "./storefront";
-import { TracePanel } from "./trace-panel";
+import { Desk, Path, Shelf, Stage, questionFor } from "./showroom";
 
 const SESSION_KEY = "shopmind-session";
 
 export function DemoApp() {
   const { locale } = useLocale();
   const t = text(locale);
-  const [tab, setTab] = useState<"shop" | "chat" | "trace">("shop");
   const [products, setProducts] = useState<PublicProduct[]>([]);
   const [productError, setProductError] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -25,6 +21,7 @@ export function DemoApp() {
   const [liveNodes, setLiveNodes] = useState<NodeTrace[]>([]);
   const [last, setLast] = useState<ChatResponse | null>(null);
   const [sessionId, setSessionId] = useState("web");
+  const [featuredSku, setFeaturedSku] = useState("LUME-LAMP");
   const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
@@ -70,7 +67,6 @@ export function DemoApp() {
       setBusy(true);
       setChatError(false);
       setLiveNodes([]);
-      setTab("chat");
       try {
         await streamChat(
           { message, session_id: sessionId, locale, history },
@@ -84,6 +80,8 @@ export function DemoApp() {
                 ),
               );
             } else if (event.event === "done") {
+              const sku = event.data.products[0]?.sku;
+              if (sku) setFeaturedSku(sku);
               setLast(event.data);
               setMessages((current) =>
                 current.map((item) =>
@@ -105,64 +103,40 @@ export function DemoApp() {
     [busy, locale, messages, sessionId],
   );
 
-  return (
-    <div className="mx-auto max-w-6xl px-4 py-5">
-      <Hero locale={locale} />
-      <div className="mt-4 grid grid-cols-3 gap-1 rounded-xl border border-line bg-panel p-1 lg:hidden">
-        <TabButton active={tab === "shop"} onClick={() => setTab("shop")} label={t.shop} testId="tab-shop" />
-        <TabButton active={tab === "chat"} onClick={() => setTab("chat")} label={t.chat} testId="tab-chat" />
-        <TabButton active={tab === "trace"} onClick={() => setTab("trace")} label={t.trace} testId="tab-trace" />
-      </div>
-      <div className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-        <div className={tab === "shop" ? "block" : "hidden lg:block"}>
-          <Storefront
-            locale={locale}
-            products={products}
-            error={productError}
-            onRetry={() => setReloadKey((value) => value + 1)}
-            onAsk={(question) => void send(question)}
-          />
-        </div>
-        <div className={tab === "chat" ? "block" : "hidden lg:block"}>
-          <ChatPanel
-            locale={locale}
-            messages={messages}
-            draft={draft}
-            busy={busy}
-            error={chatError}
-            onDraft={setDraft}
-            onSend={(value) => void send(value)}
-          />
-        </div>
-      </div>
-      <div className={`mt-6 ${tab === "trace" ? "block" : "hidden lg:block"}`}>
-        <TracePanel locale={locale} nodes={liveNodes} response={last} streaming={busy} />
-      </div>
-      <p className="mt-8 text-center font-mono text-[11px] text-mist">{t.footer}</p>
-    </div>
-  );
-}
+  const featured = products.find((product) => product.sku === featuredSku) ?? products[0];
+  const shelf = products.filter((product) => product.sku !== featured?.sku);
 
-function TabButton({
-  active,
-  onClick,
-  label,
-  testId,
-}: {
-  active: boolean;
-  onClick: () => void;
-  label: string;
-  testId: string;
-}) {
   return (
-    <button
-      type="button"
-      data-testid={testId}
-      onClick={onClick}
-      aria-pressed={active}
-      className={`rounded-lg px-2 py-2 text-xs font-medium ${active ? "bg-signal text-void" : "text-mist"}`}
-    >
-      {label}
-    </button>
+    <>
+      {productError ? (
+        <p className="catalog-error">
+          {t.catalogError}
+          <button type="button" onClick={() => setReloadKey((value) => value + 1)}>
+            {t.retry}
+          </button>
+        </p>
+      ) : null}
+      <div className="stage-row">
+        <Stage product={featured} locale={locale} />
+        <Desk
+          locale={locale}
+          messages={messages}
+          draft={draft}
+          busy={busy}
+          error={chatError}
+          onDraft={setDraft}
+          onSend={(value) => void send(value)}
+        />
+      </div>
+      <Shelf
+        locale={locale}
+        products={shelf}
+        onAsk={(product) => {
+          setFeaturedSku(product.sku);
+          void send(questionFor(product.name, locale));
+        }}
+      />
+      <Path locale={locale} nodes={liveNodes.length > 0 ? liveNodes : (last?.nodes ?? [])} intent={last?.intent ?? ""} />
+    </>
   );
 }

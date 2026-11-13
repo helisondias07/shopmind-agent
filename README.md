@@ -10,9 +10,9 @@ Support agent for the fictional shop **Lume & Co.** A LangGraph workflow reads t
 
 **Demo:** [shopmind-agent.vercel.app](https://shopmind-agent.vercel.app)
 
-![ShopMind no desktop: console escuro, inventário e grafo ao vivo](docs/screenshots/desktop.png)
+![Showroom da Lume no desktop, com a luminária, o atendimento e o caminho da consulta](docs/screenshots/desktop.png)
 
-![ShopMind no celular: resposta com preço e fonte](docs/screenshots/mobile.png)
+![Showroom da Lume no celular, com a peça, o atendimento e as etiquetas](docs/screenshots/mobile.png)
 
 **Author:** Helison Dias · **License:** MIT
 
